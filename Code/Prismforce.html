@@ -1,0 +1,46 @@
+<html>
+<head>
+    <script src="balancesheetmonthwise.js"></script>
+</head>
+<body>
+    <input type="file" name="inputfile" id="inputfile" accept=".json">
+
+    <script type="text/javascript">
+
+        
+        console.log(generateSheet({
+            "expenseAmount": [
+                {
+                    "amount": 20,
+                    "startDate": "2021-02-01T00:00:00.000Z"
+                },
+                {
+                    "amount": 30,
+                    "startDate": "2021-03-01T00:00:00.000Z"
+                }
+            ],
+            "revenueAmount": [
+                {                    
+                    "amount": 10,
+                    "startDate": "2020-01-01T00:00:00.000Z"
+                },
+                {
+                    "amount": 60,
+                    "startDate": "2021-02-01T00:00:00.000Z"
+                }
+            ]
+        }));
+        document.getElementById('inputfile')
+            .addEventListener('change', function () {
+                var fr = new FileReader();
+                fr.onload = function (e) {
+                    if (e.target.result != "")
+                        console.log(generateSheet(JSON.parse(e.target.result)));
+                    else
+                        console.log('Please upload file');
+                }
+                fr.readAsText(this.files[0]);
+            })
+    </script>
+</body>
+</html>
